@@ -1,0 +1,56 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method PDO\\:\\:findAll\\(\\)\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Call to static method create\\(\\) on an unknown class PDOFactory\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Cannot access offset 'age' on mixed\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Cannot access offset 'username' on mixed\\.$#"
+			count: 2
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Cannot call method fetch\\(\\) on PDOStatement\\|false\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Constant ture not found\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Method GetUserRepo\\:\\:getAllUser\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Parameter \\#2 \\$id of static method GetUserRepo\\:\\:getUserById\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Parameter \\#2 \\$subject of function preg_match expects string, mixed given\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Part \\$result\\['age'\\] \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php
+
+		-
+			message: "#^Part \\$result\\['username'\\] \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: tests/init/GetUserRepo.php

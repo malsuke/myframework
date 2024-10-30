@@ -1,0 +1,31 @@
+services:
+  proxy:
+    image: nginx:latest
+    ports:
+      - 443:443
+    volumes:
+      - ./nginx:/etc/nginx
+    depends_on:
+      - app
+  app:
+    build: ./web/src
+    volumes:
+      # - ./web/config/php.ini:/usr/local/etc/php/php.ini
+      - ./web/src:/var/www
+    ports:
+      - 80:80
+  #   depends_on:
+  #     - db
+  # db:
+  #   image: postgres:17
+  #   environment:
+  #     POSTGRES_DB: postgres
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #   volumes:
+  #     - ./postgres/init/:/docker-entrypoint-initdb.d
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U postgres"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 3
