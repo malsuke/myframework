@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Actions;
+namespace App\Http\Api\Login\Action;
 
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
@@ -17,14 +17,10 @@ class LoginAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        $data = json_decode((string) $request->getBody(), true);
+        $data = json_decode((string)$request->getBody(), true);
 
         if (!isset($data['username'], $data['password'])) {
-            return new Response(400, ['Content-Type' => 'application/json'], json_encode(['error' => 'Invalid input']));
+            return new Response(400, ['Content-Type' => 'application/json'], (string)json_encode(['error' => 'Invalid input']));
         }
 
         $username = $data['username'];
@@ -35,12 +31,12 @@ class LoginAction implements MiddlewareInterface
             // セッションにユーザー情報を保存
             $_SESSION['username'] = $username;
 
-            return new Response(200, ['Content-Type' => 'application/json'], json_encode([
+            return new Response(200, ['Content-Type' => 'application/json'], (string)json_encode([
                 'message' => 'Login successful',
                 'username' => $username
             ]));
         }
 
-        return new Response(401, ['Content-Type' => 'application/json'], json_encode(['error' => 'Invalid credentials']));
+        return new Response(401, ['Content-Type' => 'application/json'], (string)json_encode(['error' => 'Invalid credentials']));
     }
 }

@@ -8,14 +8,20 @@ services:
     depends_on:
       - app
   app:
-    build: ./web/src
+    build:
+      context: ./web/src
+      args:
+        - NEW_RELIC_AGENT_VERSION=11.3.0.16
+        - NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}
+        - NEW_RELIC_APP_NAME=app
     volumes:
       # - ./web/config/php.ini:/usr/local/etc/php/php.ini
       - ./web/src:/var/www
     ports:
       - 80:80
-  #   depends_on:
-  #     - db
+  newrelic-php-daemon:
+    image: newrelic/php-daemon
+
   # db:
   #   image: postgres:17
   #   environment:

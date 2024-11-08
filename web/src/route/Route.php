@@ -31,6 +31,11 @@ class Route
     {
         $method = $request->getMethod();
         $path = $request->getUri()->getPath();
+
+        if (extension_loaded('newrelic')) {
+            newrelic_name_transaction($path);
+        }
+
         $action = self::$routes[$method][$path] ?? null;
         if ($action === null) {
             return [new NotFoundAction()];
